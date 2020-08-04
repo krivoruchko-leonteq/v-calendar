@@ -33,6 +33,7 @@ export { default as head } from 'lodash/head';
 export { default as last } from 'lodash/last';
 export { default as uniq } from 'lodash/uniq';
 import _some from 'lodash/some';
+import _findIndex from 'lodash/findIndex';
 
 // Type checkers
 export const getType = value =>
@@ -44,3 +45,4 @@ export const has = _has;
 export const hasAny = (obj, props) => _some(props, p => _has(obj, p));
 // Collection utils
 export const some = _some;
+export const findIndex = _findIndex;

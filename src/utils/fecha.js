@@ -1,7 +1,7 @@
 /* eslint-disable no-bitwise, no-mixed-operators, no-useless-escape, no-multi-assign */
 /* DATE FORMATTING & PARSING USING A SLIGHTLY MODIFIED VERSION OF FECHA (https://github.com/taylorhakes/fecha) */
 /* ADDS A NARROW WEEKDAY FORMAT 'dd' */
-import { isNumber, isString, isArray, isDate } from './_';
+import { isNumber, isString, isArray, isDate, findIndex } from './_';
 
 const token = /d{1,2}|W{1,4}|M{1,4}|YY(?:YY)?|S{1,3}|Do|ZZ|([HhMsDm])\1?|[aA]|"[^"]*"|'[^']*'/g;
 const twoDigits = /\d\d?/;
@@ -13,9 +13,7 @@ const noop = () => {};
 
 function monthUpdate(arrName) {
   return (d, v, i18n) => {
-    const index = i18n[arrName].indexOf(
-      v.charAt(0).toUpperCase() + v.substr(1).toLowerCase(),
-    );
+    const index = findIndex(i18n[arrName], m => m.match(new RegExp(v, 'i')));
     if (~index) {
       d.month = index;
     }
